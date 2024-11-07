@@ -75,17 +75,7 @@ const dataSchema = z
     ),
     idSituac: z.string(),
     idSitVen: z.string(),
-  })
-  // .refine(
-  //   (data) =>
-  //     Number.parseFloat(data.vlPresta) ===
-  //     Number.parseFloat(data.vlTotal) / data.qtPrestacoes,
-  //   {
-  //     message: "Valor da prestação está incorreta",
-			// path: ['vlPresta']
-  //   },
-  // )
-	;
+  });
 
 export type DataRowProps = z.infer<typeof dataSchema>;
 

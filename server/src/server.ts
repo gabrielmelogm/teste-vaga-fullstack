@@ -6,6 +6,7 @@ import { Readable, Transform, Writable } from "node:stream";
 import { TransformStream } from "node:stream/web";
 import path from "node:path";
 import { validateData } from "./service/validateData.service";
+import { validateDocument } from "./service/validateDocument.service";
 
 const app = express();
 
@@ -47,7 +48,32 @@ app.post("/", async function (request: Request, response: Response) {
           async transform(jsonLine, controller) {
             const data = JSON.parse(Buffer.from(jsonLine));
             const validatedData = validateData(data);
-            const mappedData = JSON.stringify(validatedData.data);
+
+            const documentIsValid = validateDocument(data.nrCpfCnpj);
+
+            let mappedData;
+
+            const errors = validatedData.error?.formErrors.fieldErrors;
+            mappedData = JSON.stringify({
+              nrCpfCnpj: validatedData.data?.nrCpfCnpj,
+              errors: {
+                ...errors,
+                nrCpfCnpj: documentIsValid.error?.formErrors.formErrors,
+              },
+            });
+
+            if (validatedData.error) {
+              const errors = validatedData.error?.formErrors.fieldErrors;
+              mappedData = JSON.stringify({
+                ...data,
+                errors: {
+                  ...errors,
+                  nrCpfCnpj: documentIsValid.error?.formErrors.formErrors,
+                },
+              });
+            }
+
+            // controller.enqueue(JSON.stringify(data).concat("\n"));
             controller.enqueue(mappedData.concat("\n"));
           },
         }),

@@ -1,7 +1,4 @@
 export function validateCpf(cpf: string): boolean {
-  if (cpf.length < 11) {
-    throw new Error("Format is invalid");
-  }
   const digits = cpf.split("").map((d) => Number.parseInt(d));
   const restDigits = digits.slice(0, 9);
   const verifyDigits = digits.slice(-2);

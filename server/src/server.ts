@@ -50,15 +50,27 @@ app.post("/", async function (request: Request, response: Response) {
             const validatedData = validateData(data);
 
             const documentIsValid = validateDocument(data.nrCpfCnpj);
+            const vlPresta = !(
+              Number.parseFloat(data.vlPresta) ===
+              Number.parseFloat(
+                (
+                  Number.parseFloat(data?.vlTotal) /
+                  Number.parseFloat(data?.qtPrestacoes)
+                ).toFixed(2),
+              )
+            );
 
             let mappedData;
 
             const errors = validatedData.error?.formErrors.fieldErrors;
             mappedData = JSON.stringify({
-              nrCpfCnpj: validatedData.data?.nrCpfCnpj,
+              ...validatedData.data,
               errors: {
                 ...errors,
                 nrCpfCnpj: documentIsValid.error?.formErrors.formErrors,
+                vlPresta: vlPresta
+                  ? ["Valor da prestação está incorreta"]
+                  : null,
               },
             });
 

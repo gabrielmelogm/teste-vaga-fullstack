@@ -6,14 +6,14 @@ function validateCpf(cpf: string): boolean {
   const restDigits = digits.slice(0, 9);
   const verifyDigits = digits.slice(-2);
 
-  const verifyFirstDigit = calcFirstVerifyDigit(digits);
+  const verifyFirstDigit = calcFirstVerifyDigit(restDigits);
 
   let valid: boolean = true;
 
   if (verifyFirstDigit !== verifyDigits[0]) {
     valid = false;
   }
-  const verifySecondDigit = calcSecondVerifyDigit(digits, verifyFirstDigit);
+  const verifySecondDigit = calcSecondVerifyDigit(restDigits, verifyFirstDigit);
 
   if (verifySecondDigit !== verifyDigits[1]) {
     valid = false;

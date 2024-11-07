@@ -1,7 +1,11 @@
+import { FileUpload } from "./components/file-upload";
+
 function App() {
-  return (
-		<h1 className="text-red-500">Hello World</h1>
-  )
+	return (
+		<main className="w-screen h-screen flex flex-col items-center justify-center">
+			<FileUpload />
+		</main>
+	);
 }
 
-export default App
+export default App;

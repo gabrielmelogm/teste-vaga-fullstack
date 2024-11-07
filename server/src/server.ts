@@ -5,6 +5,7 @@ import { createReadStream } from "node:fs";
 import { Readable, Transform, Writable } from "node:stream";
 import { TransformStream } from "node:stream/web";
 import path from "node:path";
+import { validateData } from "./service/validateData.service";
 
 const app = express();
 
@@ -45,9 +46,8 @@ app.post("/", async function (request: Request, response: Response) {
         new TransformStream({
           async transform(jsonLine, controller) {
             const data = JSON.parse(Buffer.from(jsonLine));
-            const mappedData = JSON.stringify({
-              nrCpfCnpj: data.nrCpfCnpj,
-            });
+            const validatedData = validateData(data);
+            const mappedData = JSON.stringify(validatedData.data);
             controller.enqueue(mappedData.concat("\n"));
           },
         }),

@@ -1,4 +1,4 @@
-function validateCpf(cpf: string): boolean {
+export function validateCpf(cpf: string): boolean {
   if (cpf.length < 11) {
     throw new Error("Format is invalid");
   }
@@ -93,4 +93,3 @@ function calcSecondVerifyDigit(
   return restVerifyDigit;
 }
 
-console.log(validateCpf("61348701374"));

@@ -1,5 +1,28 @@
 # Teste Prático para Desenvolvedor Full Stack Kronoos
 
+## Como rodar
+1. Entre na pasta server e rode os seguintes comandos
+```bash
+cd server
+
+mkdir uploads
+
+npm install
+
+npm run dev
+```
+
+2. Entre na pasta web e rode os seguintes comandos
+```bash
+cd web
+
+npm install
+
+npm run dev
+```
+
+3. Entre no link http://localhost:5173
+
 Você foi designado para desenvolver uma aplicação que deve lidar com grandes volumes de dados. Você deve rodar as seguintes validações e tratativas para cada um dos dados do arquivo e mostrar um retorno ao concluir a rotina. A aplicação será responsável por fornecer uma massa de dados considerável (cerca de 30GB) e deve ser capaz de lidar com dados fornecidos.
 
 *Observação Importante:*

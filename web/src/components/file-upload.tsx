@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Button } from "./ui/button";
 import {
 	Card,
@@ -26,9 +26,6 @@ export function FileUpload() {
 			setFile(e.target.files[0]);
 		}
 	}
-	useEffect(() => {
-		console.log(file);
-	}, [file]);
 
 	return (
 		<Card className="w-[400px]">
